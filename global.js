@@ -64,7 +64,7 @@ for (let p of pages) {
         url = "../" + url;
     }
 
-    let a = document.createElement("TODO: create an <a> element!");
+    let a = document.createElement("a");
     a.href = url;
     a.textContent = title;
     
