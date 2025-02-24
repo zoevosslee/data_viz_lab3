@@ -1,36 +1,111 @@
-/* Design Tokens*/
-   :root {
-    /* Colors */
-    --color-primary: black;
-    --color-text: white;
-    --color-accent: palevioletred;
+
+/* Base Colors (Stay Consistent Across Themes) */
+:root {
+  /* Colors */
+  --color-accent: palevioletred; /* Consistent pink shade */
+  --color-highlight: pink;       /* Consistent pink highlight */
+  --color-star: gold;            /* No change needed */
+
+  /* Typography */
+  --font-primary: 'Roboto', sans-serif;
+  --font-size-base: 16px;
+  --font-size-title: 36px;
+  --font-size-section-title: 26px;
+  --font-size-subtitle: 18px;
+  --font-size-job-title: 20px;
+
+  /* Effects */
+  --transition-fast: 0.3s ease-in-out;
+}
+
+/* Light Mode Variables */
+html.light {
+  --color-primary: white;  
+  --color-text: black;     
+  --color-border: palevioletred;
+}
+
+/* Dark Mode Variables */
+html.dark {
+  --color-primary: black;  
+  --color-text: white;     
+  --color-border: oklch(50% 10% 200 / 40%);
+
+}
+
+/* Automatic Theme Based on OS Preference */
+@media (prefers-color-scheme: dark) {
+  html.auto {
+    --color-primary: black;  
+    --color-text: white;     
+    --color-border: oklch(50% 10% 200 / 40%);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html.auto {
+    --color-primary: white;  
+    --color-text: black;     
     --color-border: palevioletred;
-    --color-highlight: pink;
-    --color-star: gold;
-  
-    /* Typography */
-    --font-primary: 'Roboto', sans-serif;
-    --font-size-base: 16px;
-    --font-size-title: 36px;
-    --font-size-section-title: 26px;
-    --font-size-subtitle: 18px;
-    --font-size-job-title: 20px;
-  
-    /* Effects */
-    --transition-fast: 0.3s ease-in-out;
   }
-  
-  /* General*/
-  body {
-    background-color: var(--color-primary);
-    color: var(--color-text);
-    font-family: var(--font-primary);
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+}
+
+/* General Styles */
+body {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navigation */
+nav {
+  --border-color: var(--color-border);
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 0;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+nav a {
+  color: var(--color-text);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: var(--font-size-subtitle);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+nav a.current {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+nav a:hover {
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
+}
+
+/* Dropdown Theme Switcher (Top-Left) */
+.color-scheme {
+  position: absolute;
+  top: 10px;
+  left: 10px;  /* Fixes position to top-left */
+  font-size: var(--font-size-subtitle);
+}
+
+.color-scheme select {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: var(--font-size-base);
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
 
   img {
     max-width: 100%;
@@ -272,111 +347,4 @@
   text-transform: uppercase;
   margin: 0;
   color: var(--color-accent);
-}
-/* STEP 4.1: Design Tokens */
-
-/* Default to Light Theme */
-:root {
-  --color-primary: white; /* Light background */
-  --color-text: black;    /* Dark text */
-  --color-accent: palevioletred;
-  --color-border: palevioletred;
-  --color-highlight: pink;
-  --color-star: gold;
-}
-
-/* Dark Mode Variables */
-html.dark {
-  --color-primary: black;  
-  --color-text: white;     
-  --color-accent: mediumvioletred; 
-  --color-border: oklch(50% 10% 200 / 40%);
-  --color-highlight: oklch(70% 10% 200); 
-}
-
-/* Light Mode Variables */
-html.light {
-  --color-primary: white;  
-  --color-text: black;     
-  --color-accent: palevioletred;
-  --color-border: palevioletred;
-  --color-highlight: pink;
-}
-
-/* Automatic Theme (based on OS preference) */
-@media (prefers-color-scheme: dark) {
-  html.auto {
-    --color-primary: black;  
-    --color-text: white;     
-    --color-accent: mediumvioletred; 
-    --color-border: oklch(50% 10% 200 / 40%);
-    --color-highlight: oklch(70% 10% 200); 
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  html.auto {
-    --color-primary: white;  
-    --color-text: black;     
-    --color-accent: palevioletred;
-    --color-border: palevioletred;
-    --color-highlight: pink;
-  }
-}
-
-/* General Styles */
-body {
-  background-color: var(--color-primary);
-  color: var(--color-text);
-  font-family: var(--font-primary);
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Navigation */
-nav {
-  --border-color: var(--color-border);
-  border-bottom: 1px solid var(--border-color);
-  padding: 10px 0;
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-}
-
-nav a {
-  color: var(--color-text);
-  text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-size: var(--font-size-subtitle);
-  transition: background-color var(--transition-fast), color var(--transition-fast);
-}
-
-nav a.current {
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-nav a:hover {
-  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
-}
-
-/* Dropdown Theme Switcher (Top-Left) */
-.color-scheme {
-  position: absolute;
-  top: 10px;
-  left: 10px;  /* Fixes position to top-left */
-  font-size: var(--font-size-subtitle);
-}
-
-.color-scheme select {
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-size: var(--font-size-base);
-  background-color: var(--color-primary);
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
 }
